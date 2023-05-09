@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="style.css">
+    <title>TodoList-3</title>
+</head>
+
+<body>
+    <div class="container">
+        <div class="header">Task List-2023</div>
+
+        <div class="card-body">
+            <form action="#" id="add-todo-form">
+                <input type="text" name="addTodo" id="add-todo-input" placeholder="Please, enter a task!"><br>
+                <input type="button" id="add-btn" value="SUBMIT">
+            </form>
+            <div id="alert">Lütfen bir input giriniz</div>
+            <form action="#" id="filter-todo-form">
+                <input type="text" name="filterTodo" id="filter-todo-input" placeholder="You can filter a task!"><br>
+            </form>
+
+        </div><br>
+
+
+
+        <div class="card-body">
+            <ul class="list-groups">
+
+                <li class="list-group-item">
+                    <form action="#" class="item-form">
+                        <input type="checkbox" name="checkedInput" id="checked-input">
+                        <input type="text" name="itemInput" id="item-input" value="Todo1">
+                        <i class="fa fa-edit"></i>
+                        <i class="fa fa-remove"></i>
+                    </form>
+                </li>
+                <li class="list-group-item">
+                    <form action="#" class="item-form">
+                        <input type="checkbox" name="checkedInput" id="checked-input">
+                        <input type="text" name="itemInput" id="item-input" value="Todo2">
+                        <i class="fa fa-edit"></i>
+                        <i class="fa fa-remove"></i>
+                    </form>
+                </li>
+                <li class="list-group-item">
+                    <form action="#" class="item-form">
+                        <input type="checkbox" name="checkedInput" id="checked-input">
+                        <input type="text" name="itemInput" id="item-input" value="Todo3">
+                        <i class="fa fa-edit"></i>
+                        <i class="fa fa-remove"></i>
+                    </form>
+                </li>
+
+                <input type="button" id="clear-btn" value="CLEAR">
+
+
+            </ul>
+
+
+        </div>
+
+    </div>
+
+
+</body>
+
+</html>
