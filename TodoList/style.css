@@ -5,7 +5,6 @@ body {
     background-color: black;
     
 }
-
 .container {
     /* border: 1px solid orangered; */
     border-radius: 65px;
@@ -15,10 +14,8 @@ body {
     flex-direction: column;
     flex-wrap: wrap;
     justify-content:flex-start;
-    background-color: black;
-    
+    background-color: black; 
 }
-
 .header {
     width: 50%;
     height: 30px;
@@ -30,30 +27,25 @@ body {
     font-size: 30px;
     font-family: 'Times New Roman', Times, serif;
 }
-
 .header:hover {
     font-size: 40px;
     color: orangered;
 }
-
 .card-body {
     align-self:flex-start;
     width: 100%;
     height: 200px;
     text-align: center;
 }
-
 label {
     font-size: 20px;
     font-family: 'Times New Roman', Times, serif;
     color: orangered;
 
 }
-
 label:hover {
     text-shadow: 1px 1px 1px orangered; 
 }
-
 #add-todo-form {
     height: 80px;
     margin-bottom: 10px;
@@ -73,18 +65,14 @@ label:hover {
     font-family: 'Times New Roman', Times, serif;
     font-size: 18px;
 }
-
 #add-todo-input::placeholder {
     font-family: 'Times New Roman', Times, serif;
 }
-
-
 #add-todo-input:hover {
     border: 1px solid orangered;
     background-color: black;
     box-shadow: 1px 1px 8px 0px orangered;
 }
-
 #add-btn {
     margin-top: 10px;
     font-size: 15px;
@@ -95,24 +83,21 @@ label:hover {
     background-color: black;
     border: 1px solid rgb(61, 60, 60);
     border-radius: 5px;
-
 }
-
 #add-btn:hover {
     border: 1px solid orangered;
     box-shadow: 1px 1px 15px 0px orangered;
     background-color: orangered;
     color: white;
 }
-
 #filter-todo-form {
     height: 60px;
 }
-
 #filter-todo-input {
     width: 70%;
     height: 30px;
     outline: none;
+    /* margin-bottom: 0px; */
     background-color: black;
     border:0ch;
     border-radius: 5px;
@@ -134,7 +119,9 @@ label:hover {
 }
 
 #alert {
-    margin-bottom: 45px;
+    height: 30px;
+    margin-bottom: 25px;
+    margin-top: 25px;
     font-size: 18px;
     font-family: 'Times New Roman', Times, serif;
     color: rgba(128, 128, 128, 0.219);
@@ -146,19 +133,15 @@ label:hover {
     width: 80%;
     
 }
-
-
 .list-group-item {
     display: block;
     border: 1px solid aliceblue;
     margin-bottom: -1px;
     height: 45px;
 }
-
 .list-group-item:hover {
     border: 2px solid aliceblue;
 }
-
 input[type=checkbox]::before{
     font-family: FontAwesome;
     content:"\f00c";
@@ -170,15 +153,12 @@ input[type=checkbox]::before{
     color: transparent;
     width: 100%;
 }
-
 input[type=checkbox]:checked::before{
     background: black;
     color: orangered;
     transition: 0.4s;
 }
-
 #item-input {
-    
     width: 85%;
     height: 25px;
     outline: none;
@@ -190,33 +170,26 @@ input[type=checkbox]:checked::before{
     font-size: 18px;
     font-family: 'Times New Roman', Times, serif;
 }
-
 #item-input:hover {
     color: aliceblue;
     font-size: 25px;
 }
-
 .fa-edit {
     font-size: 18px;
     color: rgb(61, 60, 60);
 }
-
 .fa-edit:hover {
     font-size: 22px;
     color: orangered;
 }
-
 .fa-remove {
     font-size: 18px;
     color: rgb(61, 60, 60);
 }
-
 .fa-remove:hover {
     font-size: 22px;
     color: orangered;
 }
-
-
 #clear-btn {
     margin-top: 25px;
     margin-bottom: 25px;
@@ -229,14 +202,12 @@ input[type=checkbox]:checked::before{
     border: 1px solid rgb(61, 60, 60);
     border-radius: 5px;
 }
-
 #clear-btn:hover {
     border: 1px solid orangered;
     box-shadow: 1px 1px 15px 0px orangered;
     background-color: orangered;
     color: white;
 }
-
 .footer {
     height: 100px;
     width: 90%;
@@ -245,14 +216,12 @@ input[type=checkbox]:checked::before{
     margin-top: 15px;
     margin-left: 35px;
 }
-
 .added-item {
     background-color: rgb(8, 8, 8);
     width: 20%;
     height: 80px;
     border-radius: 10px;
 }
-
 .completed-item {
     background-color: rgb(8, 8, 8);
     width: 20%;
@@ -265,40 +234,33 @@ input[type=checkbox]:checked::before{
     height: 80px;
     border-radius: 10px;
 }
-
 h6 {
     font-size: 12px;
     margin: 0px;
     color: aliceblue;
     margin-top: 20px;
 }
-
 p {
     margin-top: 0px;
     font-size: 20px;
     color: aliceblue;
 }
-
 /* Extra small devices (phones, 600px and down) */
 @media only screen and (max-width: 600px) {
     .container {width: 600px;}
 }
-  
 /* Small devices (portrait tablets and large phones, 600px and up) */
 @media only screen and (min-width: 600px) {
     .container {width: 600px;}   
-}
-  
+}  
 /* Medium devices (landscape tablets, 768px and up) */
 @media only screen and (min-width: 768px) {
     .container {width: 600px;}
 } 
-  
 /* Large devices (laptops/desktops, 992px and up) */
 @media only screen and (min-width: 992px) {
     .container {width: 600px;}
 } 
-  
 /* Extra large devices (large laptops and desktops, 1200px and up) */
 @media only screen and (min-width: 1200px) {
     .container {width: 600px;}
