@@ -5,15 +5,59 @@ const listGroup = document.querySelector(".list-groups");
 const secondCardBody = document.querySelectorAll(".card-body")[1];
 const filterInput = document.querySelector("#filter-todo-input");
 const removeButton = document.querySelector("#clear-btn");
+const addedItemText = document.querySelector(".num-of-added");
+const editedItemText = document.querySelector(".num-of-edited");
+
+events();
+
+function events() {
+    addButton.addEventListener("click", addTodo);
+    addTodoForm.addEventListener("submit", addTodo);
+    document.addEventListener("DOMContentLoaded", pageLoad);
+    secondCardBody.addEventListener("click", removeItem);
+    filterInput.addEventListener("keyup", filterTodo);
+    removeButton.addEventListener("click", removeAllTodos);
+    listGroup.addEventListener("click", editTodos);
+}
 
 
-addButton.addEventListener("click", addTodo);
-addTodoForm.addEventListener("submit", addTodo);
-document.addEventListener("DOMContentLoaded", pageLoad);
-secondCardBody.addEventListener("click", removeItem);
-filterInput.addEventListener("keyup", filterTodo);
-removeButton.addEventListener("click", removeAllTodos);
-listGroup.addEventListener("click", editTodos);
+addedItemText.textContent = `${0} items`;
+editedItemText.textContent = `${0} items`;
+let numOfAddedItem = 0;
+let numOfEditedItem = 0;
+
+
+function numOfAddedItemInUi() {
+    numOfAddedItem++;
+    addedItemText.textContent = `${numOfAddedItem} items`;
+}
+
+function numOfEditedItemInUi() {
+    numOfEditedItem++;
+    editedItemText.textContent = `${numOfEditedItem} items`;
+}
+
+function addNumOfAddedItemToStorage() {
+    if (localStorage.getItem("numOfItem") === null) {
+        let numOfItem = 1;
+        localStorage.setItem("numOfItem", JSON.stringify(numOfItem));
+    } else {
+        let numOfItem = JSON.parse(localStorage.getItem("numOfItem"));
+        numOfItem = numOfAddedItem;
+        localStorage.setItem("numOfItem", JSON.stringify(numOfItem));
+    }
+}
+
+function addNumOfEditedItemToStorage() {
+    if (localStorage.getItem("editedItem") === null) {
+        let editedItem = 1;
+        localStorage.setItem("editedItem", JSON.stringify(editedItem));
+    } else {
+        let editedItem = JSON.parse(localStorage.getItem("editedItem"));
+        editedItem++;
+        localStorage.setItem("editedItem", JSON.stringify(editedItem));
+    }
+}
 
 
 
@@ -91,34 +135,44 @@ function addTodo(e) {
         // adding to Ui
         addTodoToUi(addTodoInput.value.trim());
 
+        // adding to number of item to Ui
+        numOfAddedItemInUi();
+
         // adding to storage
         addTodoToStorage();
+
+        //adding to number of item to Storage
+        addNumOfAddedItemToStorage();
     }
 
     addTodoInput.value = "";
     e.preventDefault();
 }
 
-
 function pageLoad(e) {
-    // for Ui
+    // for Todos
     const todoList = JSON.parse(localStorage.getItem("todoList"));
 
     todoList.forEach(data => {
         addTodoToUi(data.value);
-
     });
 
-    // for checked 
+    // for number of added items
+    const numOfItem = JSON.parse(localStorage.getItem("numOfItem"));
+    addedItemText.textContent = `${numOfItem} items`;
+
+    // for number of edited items
+    const editedItem = JSON.parse(localStorage.getItem("editedItem"));
+    editedItemText.textContent = `${editedItem} items`;
 }
 
 function removeItem(e) {
 
     if (e.target.className == "fa fa-remove") {
-        // remove from Ui
+        // remove todo from Ui
         e.target.parentElement.parentElement.remove();
 
-        // remove from storage
+        // remove todo from storage
         let todoValue = e.target.previousElementSibling.previousElementSibling.value;
         const todoList = JSON.parse(localStorage.getItem("todoList"));
         todoList.forEach((data) => {
@@ -128,6 +182,15 @@ function removeItem(e) {
             }
             localStorage.setItem("todoList", JSON.stringify(todoList));
         })
+
+        // decreasing number of added items from Storage 
+        let numOfItem = JSON.parse(localStorage.getItem("numOfItem"));
+        numOfItem--;
+        localStorage.setItem("numOfItem", JSON.stringify(numOfItem));
+
+        // decreasing number of added items from Ui 
+        numOfAddedItem--;
+        addedItemText.textContent = `${numOfItem} items`;
     }
 }
 
@@ -157,6 +220,26 @@ function removeAllTodos(e) {
     localStorage.setItem("todoList", JSON.stringify(todoList));
 
     createAlert("Removed all tasks!", "white")
+
+    // reset of number of added items in Ui 
+
+    numOfAddedItem = 0;
+    addedItemText.textContent = `${numOfAddedItem} items`;
+
+    // reset of number of added items in Storage 
+    let numOfItem = JSON.parse(localStorage.getItem("numOfItem"));
+    numOfItem = 0;
+    localStorage.setItem("numOfItem", JSON.stringify(numOfItem));
+
+    // reset of number of added items in Ui
+    numOfEditedItem = 0;
+    editedItemText.textContent = `${numOfEditedItem} items`;
+
+    // reset of number of added items in Storage
+    let editedItem = JSON.parse(localStorage.getItem("editedItem"));
+    editedItem = 0;
+    localStorage.setItem("editedItem", JSON.stringify(editedItem));
+
 }
 
 function editTodos(e) {
@@ -183,10 +266,11 @@ function editTodos(e) {
                     e.preventDefault();
                 })
             }
+
         })
+        numOfEditedItemInUi();
+        addNumOfEditedItemToStorage();
     }
-
-
     checkedTodos(e);
 }
 
