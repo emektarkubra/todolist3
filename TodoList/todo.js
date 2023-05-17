@@ -7,6 +7,7 @@ const filterInput = document.querySelector("#filter-todo-input");
 const removeButton = document.querySelector("#clear-btn");
 const addedItemText = document.querySelector(".num-of-added");
 const editedItemText = document.querySelector(".num-of-edited");
+const completedItemText = document.querySelector(".num-of-completed")
 
 events();
 
@@ -20,11 +21,12 @@ function events() {
     listGroup.addEventListener("click", editTodos);
 }
 
-
 addedItemText.textContent = `${0} items`;
 editedItemText.textContent = `${0} items`;
+completedItemText.textContent = `${0} items`;
 let numOfAddedItem = 0;
 let numOfEditedItem = 0;
+let numOfCompletedItem = 0;
 
 
 function numOfAddedItemInUi() {
@@ -59,14 +61,7 @@ function addNumOfEditedItemToStorage() {
     }
 }
 
-
-
-function addTodoToUi(value) {
-
-    let data = {
-        value: value,
-        checked: false,
-    }
+function addTodoToUi(data) {
 
     const li = document.createElement("li");
     li.className = "list-group-item";
@@ -79,15 +74,19 @@ function addTodoToUi(value) {
     checkInput.type = "checkbox";
     checkInput.name = "checkedInput";
     checkInput.id = "checked-input";
-    checkInput.checked = false;
-
+    checkInput.checked = data.checked;
 
     const textInput = document.createElement("input");
     textInput.type = "text";
     textInput.name = "itemInput";
     textInput.id = "item-input";
-    textInput.value = data.value;
+    textInput.value = data.value.trim();
     textInput.disabled = "disabled";
+
+    if (data.checked) {
+        textInput.style.color = "rgb(61, 60, 60)";
+        textInput.style.textDecoration = "line-through";
+    }
 
     const editIcon = document.createElement("i");
     editIcon.className = "fa fa-edit";
@@ -130,10 +129,10 @@ function createAlert(message, color) {
 
 function addTodo(e) {
     if (addTodoInput.value.trim() === "" || addTodoInput.value === null) {
-        createAlert("Please, enter a todo!", "white")
+        createAlert("Please, enter a task!", "orangered");
     } else {
         // adding to Ui
-        addTodoToUi(addTodoInput.value.trim());
+        addTodoToUi(addTodoInput);
 
         // adding to number of item to Ui
         numOfAddedItemInUi();
@@ -154,7 +153,7 @@ function pageLoad(e) {
     const todoList = JSON.parse(localStorage.getItem("todoList"));
 
     todoList.forEach(data => {
-        addTodoToUi(data.value);
+        addTodoToUi(data);
     });
 
     // for number of added items
@@ -164,6 +163,10 @@ function pageLoad(e) {
     // for number of edited items
     const editedItem = JSON.parse(localStorage.getItem("editedItem"));
     editedItemText.textContent = `${editedItem} items`;
+
+    //for number of completed items
+    const completedItem = JSON.parse(localStorage.getItem("completedItem"));
+    completedItemText.textContent = `${completedItem} items`;
 }
 
 function removeItem(e) {
@@ -191,6 +194,15 @@ function removeItem(e) {
         // decreasing number of added items from Ui 
         numOfAddedItem--;
         addedItemText.textContent = `${numOfItem} items`;
+
+        // decreasing number of completed items from Ui 
+        if (e.target.parentElement.children[0].checked) {
+            let completedItem = JSON.parse(localStorage.getItem("completedItem"));
+            completedItem--;
+            completedItemText.textContent = `${completedItem} items`;
+            localStorage.setItem("completedItem", JSON.stringify(completedItem));
+        }
+
     }
 }
 
@@ -219,7 +231,7 @@ function removeAllTodos(e) {
     todoList.splice(0, todoList.length);
     localStorage.setItem("todoList", JSON.stringify(todoList));
 
-    createAlert("Removed all tasks!", "white")
+    createAlert("Removed all tasks!", "orangered");
 
     // reset of number of added items in Ui 
 
@@ -239,6 +251,15 @@ function removeAllTodos(e) {
     let editedItem = JSON.parse(localStorage.getItem("editedItem"));
     editedItem = 0;
     localStorage.setItem("editedItem", JSON.stringify(editedItem));
+
+    // reset of number of completed items in Ui
+    numOfCompletedItem = 0;
+    completedItemText.textContent = `${numOfCompletedItem} items`;
+
+    //reset of number of completed items in Storage
+    let completedItem = JSON.parse(localStorage.getItem("completedItem"));
+    completedItem = 0;
+    localStorage.setItem("completedItem", JSON.stringify(completedItem));
 
 }
 
@@ -266,7 +287,6 @@ function editTodos(e) {
                     e.preventDefault();
                 })
             }
-
         })
         numOfEditedItemInUi();
         addNumOfEditedItemToStorage();
@@ -284,10 +304,24 @@ function checkedTodos(e) {
                 todoInput.style.color = "rgb(61, 60, 60)";
                 todoInput.style.textDecoration = "line-through";
                 todoList[index].checked = true;
+
+                // adding number of completed items to UI and Storage
+                let numOfCompletedItem = JSON.parse(localStorage.getItem("completedItem"));
+                numOfCompletedItem++;
+                completedItemText.textContent = `${numOfCompletedItem} items`;
+                localStorage.setItem("completedItem", JSON.stringify(numOfCompletedItem));
+
+
             } else {
                 todoInput.style.color = "rgb(204, 194, 194)";
                 todoInput.style.textDecoration = "none";
                 todoList[index].checked = false;
+
+                // decreasing number of completed items to UI and Storage
+                let numOfCompletedItem = JSON.parse(localStorage.getItem("completedItem"));
+                numOfCompletedItem--;
+                completedItemText.textContent = `${numOfCompletedItem} items`;
+                localStorage.setItem("completedItem", JSON.stringify(numOfCompletedItem));
             }
         }
     })

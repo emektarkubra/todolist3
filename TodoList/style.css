@@ -6,7 +6,6 @@ body {
     
 }
 .container {
-    /* border: 1px solid orangered; */
     border-radius: 65px;
     height: 680px;
     width: 600px;
@@ -79,9 +78,9 @@ label:hover {
     font-family: 'Times New Roman', Times, serif;
     height: 30px;
     width: 70px;
-    color: rgb(61, 60, 60);
-    background-color: black;
-    border: 1px solid rgb(61, 60, 60);
+    color: aliceblue;
+    background-color: orangered;
+    border: 1px solid orangered;
     border-radius: 5px;
 }
 #add-btn:hover {
@@ -136,8 +135,9 @@ label:hover {
 .list-group-item {
     display: block;
     border: 1px solid aliceblue;
-    margin-bottom: -1px;
+    margin-bottom: 5px;
     height: 45px;
+    border-radius: 15px;
 }
 .list-group-item:hover {
     border: 2px solid aliceblue;
@@ -159,7 +159,7 @@ input[type=checkbox]:checked::before{
     transition: 0.4s;
 }
 #item-input {
-    width: 85%;
+    width: 83%;
     height: 25px;
     outline: none;
     margin-top: 8px;
@@ -177,6 +177,7 @@ input[type=checkbox]:checked::before{
 .fa-edit {
     font-size: 18px;
     color: rgb(61, 60, 60);
+    margin-right: 3px;
 }
 .fa-edit:hover {
     font-size: 22px;
@@ -185,6 +186,7 @@ input[type=checkbox]:checked::before{
 .fa-remove {
     font-size: 18px;
     color: rgb(61, 60, 60);
+    margin-right: 5px;
 }
 .fa-remove:hover {
     font-size: 22px;
@@ -197,9 +199,9 @@ input[type=checkbox]:checked::before{
     font-family: 'Times New Roman', Times, serif;
     height: 35px;
     width: 85px;
-    background-color: black;
-    color: rgb(61, 60, 60);
-    border: 1px solid rgb(61, 60, 60);
+    background-color: orangered;
+    color: aliceblue;
+    border: 1px solid orangered;
     border-radius: 5px;
 }
 #clear-btn:hover {
